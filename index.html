@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="VA Headhunter - Find your perfect virtual assistant in 7 days or less. Expert screening, perfect matches, guaranteed results.">
+    <title>VA Headhunter | Find Your Perfect Virtual Assistant</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--primary:#2563eb;--primary-dark:#1d4ed8;--secondary:#10b981;--dark:#1f2937;--light:#f9fafb;--gray:#6b7280}
+        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;line-height:1.6;color:var(--dark);background:#fff}
+        .container{max-width:1200px;margin:0 auto;padding:0 20px}
+        section{padding:80px 0}
+        h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:800;line-height:1.1;margin-bottom:24px}
+        h2{font-size:clamp(2rem,4vw,3rem);font-weight:700;margin-bottom:16px}
+        h3{font-size:1.5rem;font-weight:600;margin-bottom:12px}
+        p{font-size:1.125rem;color:var(--gray);margin-bottom:16px}
+        .btn{display:inline-block;padding:16px 32px;background:var(--primary);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:1.125rem;transition:all 0.2s;border:none;cursor:pointer}
+        .btn:hover{background:var(--primary-dark);transform:translateY(-2px)}
+        .btn-secondary{background:#fff;color:var(--primary);border:2px solid var(--primary)}
+        .btn-secondary:hover{background:var(--primary);color:#fff}
+        
+        /* Hero */
+        .hero{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:120px 0;text-align:center}
+        .hero p{color:rgba(255,255,255,0.9);font-size:1.25rem;max-width:600px;margin:0 auto 32px}
+        .hero .btn{background:#fff;color:var(--primary)}
+        .hero .btn:hover{background:var(--light)}
+        
+        /* Problem/Solution */
+        .problem-solution{background:var(--light)}
+        .grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:center}
+        .problem-box,.solution-box{padding:40px;background:#fff;border-radius:16px;box-shadow:0 4px 6px rgba(0,0,0,0.1)}
+        .problem-box{border-left:4px solid #ef4444}
+        .solution-box{border-left:4px solid var(--secondary)}
+        .check-list{list-style:none}
+        .check-list li{padding:12px 0;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;gap:12px}
+        .check-list li:last-child{border-bottom:none}
+        .check-list .check{color:var(--secondary);font-weight:bold;font-size:1.25rem}
+        .check-list .x{color:#ef4444;font-weight:bold;font-size:1.25rem}
+        
+        /* Pricing */
+        .pricing{text-align:center}
+        .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;margin-top:48px}
+        .pricing-card{background:#fff;border:2px solid #e5e7eb;border-radius:16px;padding:40px 32px;transition:all 0.3s;position:relative}
+        .pricing-card:hover{border-color:var(--primary);transform:translateY(-8px);box-shadow:0 20px 25px -5px rgba(0,0,0,0.1)}
+        .pricing-card.popular{border-color:var(--primary);background:linear-gradient(135deg,#eff6ff 0%,#fff 100%)}
+        .popular-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--primary);color:#fff;padding:8px 24px;border-radius:20px;font-size:0.875rem;font-weight:600}
+        .price{font-size:3rem;font-weight:800;color:var(--primary);margin:24px 0}
+        .price span{font-size:1rem;color:var(--gray);font-weight:400}
+        .pricing-features{margin:32px 0;text-align:left}
+        .pricing-features li{padding:12px 0;display:flex;align-items:start;gap:12px}
+        .pricing-features .check{color:var(--secondary);font-weight:bold;flex-shrink:0}
+        
+        /* FAQ */
+        .faq{background:var(--light)}
+        .faq-item{background:#fff;border-radius:12px;margin-bottom:16px;overflow:hidden;box-shadow:0 2px 4px rgba(0,0,0,0.05)}
+        .faq-question{width:100%;padding:24px;text-align:left;background:none;border:none;font-size:1.125rem;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+        .faq-question:hover{background:#f9fafb}
+        .faq-answer{padding:0 24px 24px;color:var(--gray);display:none}
+        .faq-item.active .faq-answer{display:block}
+        .faq-item.active .faq-question{color:var(--primary)}
+        
+        /* Email Capture */
+        .email-capture{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;text-align:center}
+        .email-capture h2{color:#fff}
+        .email-capture p{color:rgba(255,255,255,0.9)}
+        .email-form{display:flex;gap:16px;max-width:500px;margin:32px auto 0;flex-wrap:wrap;justify-content:center}
+        .email-form input{flex:1;min-width:250px;padding:16px 24px;border-radius:8px;border:none;font-size:1rem;outline:none}
+        .email-form button{background:#fff;color:var(--primary);padding:16px 32px;border:none;border-radius:8px;font-weight:600;font-size:1rem;cursor:pointer;transition:all 0.2s}
+        .email-form button:hover{background:var(--light);transform:translateY(-2px)}
+        
+        /* Calendly */
+        .calendly-section{text-align:center}
+        .calendly-embed{margin-top:32px;min-height:700px}
+        
+        /* Footer */
+        footer{background:var(--dark);color:#fff;padding:40px 0;text-align:center}
+        footer p{color:rgba(255,255,255,0.7);font-size:0.875rem}
+        
+        /* Mobile */
+        @media(max-width:768px){
+            section{padding:60px 0}
+            .hero{padding:80px 0}
+            .grid-2{grid-template-columns:1fr;gap:32px}
+            .pricing-card{padding:32px 24px}
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Stop Wasting Time on Bad VA Hires</h1>
+            <p>We find, screen, and match you with the perfect virtual assistant in 7 days or less. 94% success rate. Money-back guarantee.</p>
+            <a href="#pricing" class="btn">See Pricing Plans</a>
+            <p style="margin-top:16px;font-size:0.875rem;opacity:0.8">⚡ Average placement time: 5.3 days</p>
+        </div>
+    </section>
+
+    <!-- Problem/Solution -->
+    <section class="problem-solution">
+        <div class="container">
+            <div class="grid-2">
+                <div class="problem-box">
+                    <h2 style="color:#ef4444">The VA Hiring Nightmare</h2>
+                    <p>Sound familiar?</p>
+                    <ul class="check-list">
+                        <li><span class="x">✗</span> Posted on Upwork, got 200+ spam applications</li>
+                        <li><span class="x">✗</span> Spent 20+ hours screening unqualified candidates</li>
+                        <li><span class="x">✗</span> Hired someone who ghosted after 2 weeks</li>
+                        <li><span class="x">✗</span> Language barriers caused constant miscommunication</li>
+                        <li><span class="x">✗</span> Skills looked great on paper, failed in practice</li>
+                    </ul>
+                </div>
+                <div class="solution-box">
+                    <h2 style="color:var(--secondary)">The VA Headhunter Solution</h2>
+                    <p>We handle everything:</p>
+                    <ul class="check-list">
+                        <li><span class="check">✓</span> Post everywhere (Upwork, LinkedIn, Philippines, LatAm)</li>
+                        <li><span class="check">✓</span> Pre-screen ALL candidates withSkills + English tests</li>
+                        <li><span class="check">✓</span> Background checks + reference verification</li>
+                        <li><span class="check">✓</span> Top 3 matches presented with full profiles</li>
+                        <li><span class="check">✓</span> 90-day replacement guarantee included</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2>Simple, Transparent Pricing</h2>
+            <p>One-time fee. No monthly subscriptions. Pay only when you're satisfied.</p>
+            <div class="pricing-grid">
+                <!-- Basic Tier -->
+                <div class="pricing-card">
+                    <h3>Essential</h3>
+                    <div class="price">$1,200</div>
+                    <p>Perfect for solopreneurs needing one great VA</p>
+                    <ul class="pricing-features">
+                        <li><span class="check">✓</span> Job post on 3 platforms (Upwork, OnlineJobs.ph, LinkedIn)</li>
+                        <li><span class="check">✓</span> 50+ applications screened</li>
+                        <li><span class="check">✓</span> Top 5 candidates with full profiles</li>
+                        <li><span class="check">✓</span> Basic skills assessment</li>
+                        <li><span class="check">✓</span> English proficiency test</li>
+                        <li><span class="check">✓</span> 30-day replacement guarantee</li>
+                        <li><span class="check">✓</span> Email support</li>
+                    </ul>
+                    <a href="#calendly" class="btn btn-secondary" style="width:100%">Get Started</a>
+                </div>
+
+                <!-- Pro Tier (Popular) -->
+                <div class="pricing-card popular">
+                    <div class="popular-badge">MOST POPULAR</div>
+                    <h3>Professional</h3>
+                    <div class="price">$1,700</div>
+                    <p>For growing businesses needing specialized talent</p>
+                    <ul class="pricing-features">
+                        <li><span class="check">✓</span> Everything in Essential, plus:</li>
+                        <li><span class="check">✓</span> Job post on 6+ platforms + niche boards</li>
+                        <li><span class="check">✓</span> 100+ applications screened</li>
+                        <li><span class="check">✓</span> Top 3 candidates with video introductions</li>
+                        <li><span class="check">✓</span> Advanced skills assessment (role-specific)</li>
+                        <li><span class="check">✓</span> Background check + reference calls</li>
+                        <li><span class="check">✓</span> 60-day replacement guarantee</li>
+                        <li><span class="check">✓</span> Priority support + Slack access</li>
+                        <li><span class="check">✓</span> Onboarding checklist included</li>
+                    </ul>
+                    <a href="#calendly" class="btn" style="width:100%">Get Started</a>
+                </div>
+
+                <!-- Enterprise Tier -->
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">$2,200</div>
+                    <p>For teams needing multiple VAs or executive-level support</p>
+                    <ul class="pricing-features">
+                        <li><span class="check">✓</span> Everything in Professional, plus:</li>
+                        <li><span class="check">✓</span> Unlimited platform postings</li>
+                        <li><span class="check">✓</span> 200+ applications screened</li>
+                        <li><span class="check">✓</span> Top 3 candidates per role with full dossiers</li>
+                        <li><span class="check">✓</span> Custom assessment creation</li>
+                        <li><span class="check">✓</span> Comprehensive background investigation</li>
+                        <li><span class="check">✓</span> 90-day replacement guarantee</li>
+                        <li><span class="check">✓</span> Dedicated account manager</li>
+                        <li><span class="check">✓</span> Team onboarding program</li>
+                        <li><span class="check">✓</span> Quarterly check-ins for 1 year</li>
+                    </ul>
+                    <a href="#calendly" class="btn btn-secondary" style="width:100%">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <div class="container">
+            <h2 style="text-align:center">Frequently Asked Questions</h2>
+            <div style="max-width:800px;margin:48px auto 0">
+                <div class="faq-item">
+                    <button class="faq-question">How long does the process take? <span>+</span></button>
+                    <div class="faq-answer">
+                        <p>Most placements are completed in 5-7 business days. We start presenting candidates within 48 hours of kickoff. The typical timeline: Day 1-2 (job posting + initial screening), Day 3-4 (assessments + interviews), Day 5-7 (final candidates presented + your selection).</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">What if I'm not happy with the candidates? <span>+</span></button>
+                    <div class="faq-answer">
+                        <p>We keep searching at no extra cost until you're satisfied. All plans include a replacement guarantee (30/60/90 days depending on tier). If your VA doesn't work out within that period, we find you a new one for free.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Where are the VAs located? <span>+</span></button>
+                    <div class="faq-answer">
+                        <p>We source globally with focus on Philippines, Latin America (Colombia, Argentina, Mexico), and Eastern Europe. We match based on your timezone needs, language requirements, and role specifics. You can request specific regions.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Do you handle payroll or contracts? <span>+</span></button>
+                    <div class="faq-answer">
+                        <p>No, we're a placement service only. You hire the VA directly as an independent contractor. We provide contract templates and can recommend payroll services like Deel, Remote, or Wise if needed.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">What roles do you specialize in? <span>+</span></button>
+                    <div class="faq-answer">
+                        <p>We place all types of VAs: executive assistants, customer support, social media managers, bookkeepers, content writers, data entry specialists, e-commerce VAs, and more. If you need it delegated, we can find it.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Is there a refund policy? <span>+</span></button>
+                    <div class="faq-answer">
+                        <p>Yes. If we can't present qualified candidates within 7 days, you get a full refund. After you hire, the replacement guarantee kicks in—if they don't work out within the guarantee period, we replace them at no cost.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Capture -->
+    <section class="email-capture">
+        <div class="container">
+            <h2>Not Ready to Commit? Get Our Free VA Hiring Checklist</h2>
+            <p>Learn the 17 mistakes that cost businesses $10K+ in bad hires. Plus, get our exact interview script.</p>
+            <form class="email-form" action="#" method="POST">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Send Me the Checklist</button>
+            </form>
+            <p style="margin-top:16px;font-size:0.875rem;opacity:0.8">No spam. Unsubscribe anytime.</p>
+        </div>
+    </section>
+
+    <!-- Calendly Section -->
+    <section class="calendly-section" id="calendly">
+        <div class="container">
+            <h2>Ready to Find Your Perfect VA?</h2>
+            <p>Book a free 15-minute consultation. We'll discuss your needs and recommend the best plan.</p>
+            <div class="calendly-embed">
+                <!-- Calendly inline widget begin -->
+                <div class="calendly-inline-widget" data-url="https://calendly.com/va-headhunter/15min" style="min-width:320px;height:700px;"></div>
+                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                <!-- Calendly inline widget end -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 VA Headhunter. All rights reserved.</p>
+            <p style="margin-top:8px">Find your perfect virtual assistant in 7 days or less.</p>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                item.classList.toggle('active');
+                btn.querySelector('span').textContent = item.classList.contains('active') ? '−' : '+';
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});
+            });
+        });
+    </script>
+</body>
+</html>
