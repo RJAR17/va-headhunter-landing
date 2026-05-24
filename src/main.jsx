@@ -14,10 +14,14 @@ import {
   ShieldCheck,
   ShoppingCart,
   UserCircleCheck,
+  WarningCircle,
 } from '@phosphor-icons/react';
 import './styles.css';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const FORM_ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT;
+const FALLBACK_EMAIL = import.meta.env.VITE_CONTACT_EMAIL || 'rob@rjar.us';
 
 const offers = [
   {
@@ -32,7 +36,7 @@ const offers = [
     name: 'Applicant Pile Cleanup',
     price: '$299',
     stage: 'Best first move',
-    description: 'Already have applicants? Send the pile. We rank the people worth interviewing and tell you who to skip.',
+    description: 'Already have applicants? Send the pile. We rank the people worth interviewing, flag the risky ones, and tell you who to skip.',
     bullets: ['Review up to 50 applicants', 'Rank top candidates', 'Flag red flags', 'Recommend interview order', 'Role-specific interview questions'],
     cta: 'Clean up my applicants',
     featured: true,
@@ -61,6 +65,7 @@ const roles = [
     title: 'Customer support rep',
     copy: 'Inbox, chat, returns, tracking questions, and customer follow-up without careless tone or sloppy answers.',
     criteria: 'Writing quality, empathy, accuracy, escalation judgment.',
+    proof: 'Sample screen: delayed order reply + refund boundary check.',
     className: 'wide',
   },
   {
@@ -68,6 +73,7 @@ const roles = [
     title: 'Order processing and vendor follow-up',
     copy: 'Purchase orders, supplier updates, fulfillment checks, and exception handling for stores that cannot afford dropped balls.',
     criteria: 'Detail orientation, urgency, follow-through, tool comfort.',
+    proof: 'Sample screen: PO status chase + vendor update summary.',
     className: 'wide lift',
   },
   {
@@ -75,6 +81,7 @@ const roles = [
     title: 'Product upload and catalog support',
     copy: 'Listings, product data, Shopify updates, image checks, and repeatable catalog cleanup.',
     criteria: 'Accuracy, platform experience, QA habits.',
+    proof: 'Sample screen: spot bad specs, mismatched images, and missing fields.',
     className: 'compact',
   },
   {
@@ -82,8 +89,16 @@ const roles = [
     title: 'Founder ops and admin assistant',
     copy: 'Founder inbox, admin tasks, research, scheduling, SOP follow-through, and loose operational edges.',
     criteria: 'Communication, discretion, prioritization, async reliability.',
+    proof: 'Sample screen: prioritize mixed founder requests without hand-holding.',
     className: 'wide-last',
   },
+];
+
+const cleanupDeliverables = [
+  ['Candidate ranking', 'A clear top-to-bottom list so you know who deserves the first interview slot.'],
+  ['Skip reasons', 'Plain-English notes on weak applicants, risky patterns, and what not to waste time on.'],
+  ['Interview plan', 'Role-specific questions tied to customer tone, order accuracy, catalog detail, or founder ops judgment.'],
+  ['Next move', 'If the pile is weak, you get a practical recommendation: revise the post, change channel, or start a search.'],
 ];
 
 const steps = [
@@ -106,6 +121,7 @@ function App() {
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [fallbackUsed, setFallbackUsed] = useState(false);
   const rootRef = useRef(null);
 
   useEffect(() => {
@@ -147,22 +163,65 @@ function App() {
   const scrollToForm = () => document.getElementById('hiring-audit')?.scrollIntoView({ behavior: 'smooth' });
   const scrollToPackages = () => document.getElementById('packages')?.scrollIntoView({ behavior: 'smooth' });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const email = String(data.get('email') || '');
+  const buildPayload = (form) => {
+    const data = new FormData(form);
+    return {
+      name: String(data.get('name') || '').trim(),
+      email: String(data.get('email') || '').trim(),
+      businessType: String(data.get('businessType') || '').trim(),
+      role: String(data.get('role') || '').trim(),
+      stage: String(data.get('stage') || '').trim(),
+      notes: String(data.get('notes') || '').trim(),
+    };
+  };
 
-    if (!email.includes('@') || !email.includes('.')) {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const payload = buildPayload(event.currentTarget);
+
+    if (!payload.name) {
+      setError('Enter your name so we know who to reply to.');
+      return;
+    }
+
+    if (!payload.email.includes('@') || !payload.email.includes('.')) {
       setError('Enter a valid email so we can reply to the audit request.');
       return;
     }
 
     setError('');
     setIsLoading(true);
-    window.setTimeout(() => {
-      setIsLoading(false);
+
+    try {
+      if (FORM_ENDPOINT) {
+        const response = await fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) throw new Error('Lead form request failed');
+      } else {
+        const body = [
+          `Name: ${payload.name}`,
+          `Email: ${payload.email}`,
+          `Business type: ${payload.businessType || 'Not provided'}`,
+          `Role: ${payload.role || 'Not provided'}`,
+          `Stage: ${payload.stage || 'Not provided'}`,
+          '',
+          payload.notes || 'No notes provided.',
+        ].join('\n');
+        const mailto = `mailto:${FALLBACK_EMAIL}?subject=${encodeURIComponent('VA Headhunter hiring audit request')}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailto;
+        setFallbackUsed(true);
+      }
+
       setSubmitted(true);
-    }, 450);
+    } catch {
+      setError('We could not send the request. Please email the details directly and try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -193,6 +252,10 @@ function App() {
           <div className="hero-actions">
             <button className="button" onClick={scrollToForm}>Get a hiring audit <ArrowRight weight="bold" /></button>
             <button className="button button-secondary" onClick={scrollToPackages}>View packages</button>
+          </div>
+          <div className="hero-offer-note" aria-label="Recommended first offer">
+            <strong>Already have applicants?</strong>
+            <span>$299 Applicant Pile Cleanup ranks up to 50 candidates, flags red flags, and gives you the interview order.</span>
           </div>
         </div>
 
@@ -233,6 +296,31 @@ function App() {
         </div>
       </section>
 
+      <section className="section cleanup-spotlight reveal" aria-label="Applicant Pile Cleanup details">
+        <div className="cleanup-intro">
+          <p className="kicker">Recommended first move</p>
+          <h2>Turn the applicant mess into a short, sane interview list.</h2>
+          <p>If you already posted the role, this is the fastest way to stop guessing. Send the applicant pile and get the next hiring decision organized.</p>
+          <button className="button" onClick={scrollToForm}>Clean up my applicants <ArrowRight weight="bold" /></button>
+        </div>
+        <div className="cleanup-panel">
+          <div className="cleanup-price">
+            <span>Applicant Pile Cleanup</span>
+            <strong>$299</strong>
+            <small>Review up to 50 applicants</small>
+          </div>
+          <div className="cleanup-list">
+            {cleanupDeliverables.map(([title, copy]) => (
+              <article key={title}>
+                <CheckCircle weight="fill" />
+                <div><h3>{title}</h3><p>{copy}</p></div>
+              </article>
+            ))}
+          </div>
+          <div className="cleanup-warning"><WarningCircle weight="duotone" /> If none of the applicants are worth interviewing, you will get that answer directly instead of a forced shortlist.</div>
+        </div>
+      </section>
+
       <section className="section roles-section" id="roles">
         <div className="section-heading reveal">
           <p className="kicker">Role focus</p>
@@ -240,12 +328,17 @@ function App() {
           <p>Start narrow, screen consistently, and hire for operational judgment instead of resume polish.</p>
         </div>
         <div className="role-grid">
-          {roles.map(({ icon: Icon, title, copy, criteria, className }) => (
+          {roles.map(({ icon: Icon, title, copy, criteria, proof, className }) => (
             <article className={`role-card stack-card ${className}`} key={title}>
-              <div className="icon-wrap"><Icon weight="duotone" /></div>
-              <h3>{title}</h3>
-              <p>{copy}</p>
-              <small>{criteria}</small>
+              <div>
+                <div className="icon-wrap"><Icon weight="duotone" /></div>
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </div>
+              <div>
+                <small>{criteria}</small>
+                <div className="proof-strip"><MagnifyingGlass weight="bold" /> {proof}</div>
+              </div>
             </article>
           ))}
         </div>
@@ -349,15 +442,15 @@ function App() {
           <p>Tell us where hiring is stuck. We will point you toward the smallest practical next step: kit, cleanup, shortlist search, or full support.</p>
           <div className="credibility-card">
             <EnvelopeSimple weight="duotone" />
-            <div><strong>Early client results coming soon.</strong><span>For now, the trust signal is clear scope, practical screening, and honest recommendations.</span></div>
+            <div><strong>Plain recommendations, not recruiter fog.</strong><span>If the applicant pile is weak, you will hear that directly. If a smaller fix is enough, we will not push a larger search.</span></div>
           </div>
         </div>
         <form onSubmit={handleSubmit} aria-label="Hiring audit form" noValidate>
           {submitted ? (
             <div className="success-state">
               <ShieldCheck weight="duotone" />
-              <h3>Audit request captured.</h3>
-              <p>This demo form is ready for Vercel, but still needs a backend connection before launch.</p>
+              <h3>{fallbackUsed ? 'Email draft prepared.' : 'Audit request received.'}</h3>
+              <p>{fallbackUsed ? 'Your email app should open with the request details. Send it from there and we will reply with the best next step.' : 'We will review the details and reply with the best next step.'}</p>
             </div>
           ) : isLoading ? (
             <div className="loading-state" aria-live="polite">
@@ -365,7 +458,7 @@ function App() {
               <div className="skeleton" />
               <div className="skeleton" />
               <div className="skeleton tall" />
-              <p>Preparing the request preview.</p>
+              <p>Preparing the request.</p>
             </div>
           ) : (
             <>
