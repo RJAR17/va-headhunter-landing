@@ -25,7 +25,8 @@ import founderCredibilityImage from './assets/media/va-headhunter-founder-credib
 
 gsap.registerPlugin(ScrollTrigger);
 
-const FORM_ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT;
+const DEFAULT_FORM_ENDPOINT = 'https://n-8-n-u35578.vm.elestio.app/webhook/va-headhunter-hiring-audit';
+const FORM_ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT || DEFAULT_FORM_ENDPOINT;
 const FALLBACK_EMAIL = import.meta.env.VITE_CONTACT_EMAIL || 'rob@rjar.us';
 
 const auditSnapshot = [
@@ -238,6 +239,11 @@ function App() {
       stuck: String(data.get('stuck') || '').trim(),
       timeline: String(data.get('timeline') || '').trim(),
       notes: String(data.get('notes') || '').trim(),
+      companyWebsite: String(data.get('companyWebsite') || '').trim(),
+      source: 'vaheadhunter.com',
+      pageUrl: window.location.href,
+      submittedAt: new Date().toISOString(),
+      userAgent: window.navigator.userAgent,
     };
   };
 
@@ -252,6 +258,12 @@ function App() {
 
     if (!payload.email.includes('@') || !payload.email.includes('.')) {
       setError('Enter a valid email so we can reply to the audit request.');
+      return;
+    }
+
+    if (payload.companyWebsite) {
+      setIsLoading(false);
+      setSubmitted(true);
       return;
     }
 
@@ -275,6 +287,9 @@ function App() {
           `Role type: ${payload.roleType || 'Not provided'}`,
           `Hiring stage: ${payload.stage || 'Not provided'}`,
           `Timeline: ${payload.timeline || 'Not provided'}`,
+          `Source: ${payload.source}`,
+          `Page URL: ${payload.pageUrl}`,
+          `Submitted at: ${payload.submittedAt}`,
           '',
           `Currently stuck: ${payload.stuck || 'Not provided'}`,
           '',
@@ -610,6 +625,7 @@ function App() {
             </div>
           ) : (
             <>
+              <label className="bot-field" aria-hidden="true">Company website<input name="companyWebsite" type="text" tabIndex="-1" autoComplete="off" /></label>
               <label>Name<input name="name" type="text" autoComplete="name" placeholder="Your name" required /></label>
               <label>Email<input name="email" type="email" autoComplete="email" placeholder="you@company.com" required aria-describedby={error ? 'form-error' : undefined} /></label>
               <label>Store URL<input name="storeUrl" type="url" inputMode="url" placeholder="yourstore.com" /></label>

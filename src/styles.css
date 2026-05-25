@@ -310,6 +310,7 @@ form { display: grid; gap: 16px; padding: 30px; border-radius: 34px; background:
 label { display: grid; gap: 8px; color: var(--ink-2); font-size: 0.92rem; font-weight: 850; }
 input, select, textarea { width: 100%; min-height: 52px; padding: 13px 14px; border: 1px solid var(--line); border-radius: 16px; background: #fbf7ef; color: var(--ink); transition: border-color 220ms ease, box-shadow 220ms ease, background 220ms ease; }
 input:focus, select:focus, textarea:focus { background: var(--surface); border-color: rgba(49,93,72,0.45); box-shadow: 0 0 0 4px rgba(49,93,72,0.09); }
+.bot-field { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 textarea { resize: vertical; }
 .form-error { margin: 0; color: #8b3129; font-weight: 800; }
 .success-state, .loading-state { min-height: 430px; display: grid; place-items: center; align-content: center; text-align: center; }
