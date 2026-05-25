@@ -158,21 +158,21 @@ h1, h2, h3, p { margin-top: 0; }
 h1 {
   margin-bottom: 30px;
   max-width: 1020px;
-  font-size: clamp(3rem, 5.65vw, 5.85rem);
-  line-height: 1.03;
-  letter-spacing: -0.064em;
+  font-size: clamp(2.9rem, 5.25vw, 5.35rem);
+  line-height: 1.08;
+  letter-spacing: -0.046em;
   color: var(--charcoal);
   text-wrap: balance;
 }
 h2 {
-  margin-bottom: 16px;
-  font-size: clamp(2.15rem, 4.8vw, 5rem);
-  line-height: 0.95;
-  letter-spacing: -0.072em;
+  margin-bottom: 20px;
+  font-size: clamp(2rem, 3.85vw, 3.85rem);
+  line-height: 1.14;
+  letter-spacing: -0.038em;
   color: var(--charcoal);
   text-wrap: balance;
 }
-h3 { margin: 0 0 12px; color: var(--charcoal); font-size: 1.35rem; line-height: 1.05; letter-spacing: -0.04em; }
+h3 { margin: 0 0 12px; color: var(--charcoal); font-size: 1.35rem; line-height: 1.2; letter-spacing: -0.018em; }
 p { color: var(--muted); line-height: 1.64; text-wrap: pretty; }
 
 .hero {
@@ -346,7 +346,7 @@ p { color: var(--muted); line-height: 1.64; text-wrap: pretty; }
   border-bottom: 1px solid rgba(255,255,255,0.18);
 }
 .cleanup-price span { color: var(--clay-soft); font-size: 0.86rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; }
-.cleanup-price strong { color: var(--surface); font-size: clamp(2.6rem, 6vw, 5rem); line-height: 0.85; letter-spacing: -0.08em; font-weight: 950; font-variant-numeric: tabular-nums; }
+.cleanup-price strong { color: var(--surface); font-size: clamp(2.45rem, 5.3vw, 4.35rem); line-height: 1.02; letter-spacing: -0.05em; font-weight: 950; font-variant-numeric: tabular-nums; }
 .cleanup-price small { grid-column: 1 / -1; color: rgba(255,255,255,0.74); font-weight: 750; }
 .cleanup-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .cleanup-list article {
@@ -715,8 +715,8 @@ footer a { color: var(--moss-dark); font-weight: 900; }
   .site-header .button { display: none; }
   .hero { margin-top: 38px; }
   .hero-copy { padding-top: 22px; }
-  h1 { font-size: clamp(2.75rem, 12vw, 4.2rem); line-height: 1.02; letter-spacing: -0.058em; }
-  h2 { font-size: clamp(2.35rem, 11vw, 3.5rem); }
+  h1 { font-size: clamp(2.55rem, 10.5vw, 3.85rem); line-height: 1.08; letter-spacing: -0.042em; }
+  h2 { font-size: clamp(2.05rem, 8.5vw, 3rem); line-height: 1.14; letter-spacing: -0.034em; }
   .hero-panel { min-height: 580px; }
   .panel-image { inset: 0 0 18% 0; border-radius: 34px; }
   .shortlist-card { width: 96%; padding: 18px; }
