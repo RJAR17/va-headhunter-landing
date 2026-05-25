@@ -7,7 +7,6 @@ import {
   CheckCircle,
   ClipboardText,
   EnvelopeSimple,
-  Funnel,
   Headset,
   MagnifyingGlass,
   Package,
@@ -25,47 +24,39 @@ const FALLBACK_EMAIL = import.meta.env.VITE_CONTACT_EMAIL || 'rob@rjar.us';
 
 const offers = [
   {
-    name: 'VA Hiring Kit',
-    price: '$149',
-    stage: 'Before you post',
-    description: 'Turn a vague need for help into a clean role post, scorecard, red-flag checklist, and first interview script.',
-    bullets: ['Role description', 'Screening questions', 'Candidate scorecard', 'Interview script', 'Red flags checklist'],
-    cta: 'Get the kit',
+    name: 'Free Ecommerce Hiring Audit',
+    price: 'Free',
+    stage: 'Start here',
+    description: 'Show us the role or applicant pile. We identify the hiring leaks, weak-fit risks, and best next move before you spend on a full search.',
+    bullets: ['Role clarity review', 'Applicant/process risk notes', 'Best-fit offer recommendation', 'No bloated consulting call'],
+    cta: 'Get my audit',
   },
   {
     name: 'Applicant Pile Cleanup',
-    price: '$299',
-    stage: 'Best first move',
-    description: 'Already have applicants? Send the pile. We rank the people worth interviewing, flag the risky ones, and tell you who to skip.',
-    bullets: ['Review up to 50 applicants', 'Rank top candidates', 'Flag red flags', 'Recommend interview order', 'Role-specific interview questions'],
+    price: 'From $399',
+    stage: 'Already posted',
+    description: 'Send the pile. We rank the candidates worth interviewing, flag the obvious risks, and tell you if the whole pool is too weak to trust.',
+    bullets: ['Review up to 50 applicants', 'Rank top candidates', 'Flag red flags', 'Interview order', 'Role-specific questions'],
     cta: 'Clean up my applicants',
-    featured: true,
   },
   {
-    name: 'Top 3 Shortlist Search',
-    price: 'From $995',
-    stage: 'When the pool is weak',
-    description: 'We define the role, source candidates, screen for fit, and deliver three credible candidates worth your interview time.',
-    bullets: ['Intake and success profile', 'Sourcing and screening', 'Top 3 candidate shortlist', 'Candidate notes', 'Final interview questions'],
-    cta: 'Start a search',
-  },
-  {
-    name: 'Search + Onboarding Support',
+    name: 'Ecommerce Ops Hire-in-30',
     price: 'From $2,500',
-    stage: 'For higher-stakes roles',
-    description: 'Full search support with sharper evaluation, final selection help, onboarding structure, and written replacement terms.',
-    bullets: ['Full search', 'Scorecards and test task support', 'Final interview support', 'Onboarding checklist', 'Replacement support terms'],
-    cta: 'Book a call',
+    stage: 'Flagship',
+    description: 'Define the role, source and screen candidates, deliver a top-three shortlist, and install the onboarding rhythm so the hire does not become another person to babysit.',
+    bullets: ['Founder bottleneck audit', 'Role success profile', 'Sourcing and screening', 'Top 3 shortlist packet', 'Interview and test-task support', '30-day onboarding system'],
+    cta: 'Install my first remote ops hire',
+    featured: true,
   },
 ];
 
 const roles = [
   {
     icon: Headset,
-    title: 'Customer support rep',
-    copy: 'Inbox, chat, returns, tracking questions, and customer follow-up without careless tone or sloppy answers.',
+    title: 'Customer support assistant',
+    copy: 'Tickets, returns, tracking questions, customer follow-up, and reply quality that protects trust.',
     criteria: 'Writing quality, empathy, accuracy, escalation judgment.',
-    proof: 'Sample screen: delayed order reply + refund boundary check.',
+    proof: 'Screen: delayed order reply plus refund boundary check.',
     className: 'wide',
   },
   {
@@ -73,15 +64,15 @@ const roles = [
     title: 'Order processing and vendor follow-up',
     copy: 'Purchase orders, supplier updates, fulfillment checks, and exception handling for stores that cannot afford dropped balls.',
     criteria: 'Detail orientation, urgency, follow-through, tool comfort.',
-    proof: 'Sample screen: PO status chase + vendor update summary.',
+    proof: 'Screen: PO status chase plus vendor update summary.',
     className: 'wide lift',
   },
   {
     icon: ShoppingCart,
     title: 'Product upload and catalog support',
-    copy: 'Listings, product data, Shopify updates, image checks, and repeatable catalog cleanup.',
+    copy: 'Listings, product data, Shopify updates, image checks, tagging, and repeatable catalog cleanup.',
     criteria: 'Accuracy, platform experience, QA habits.',
-    proof: 'Sample screen: spot bad specs, mismatched images, and missing fields.',
+    proof: 'Screen: spot bad specs, mismatched images, and missing fields.',
     className: 'compact',
   },
   {
@@ -89,32 +80,36 @@ const roles = [
     title: 'Founder ops and admin assistant',
     copy: 'Founder inbox, admin tasks, research, scheduling, SOP follow-through, and loose operational edges.',
     criteria: 'Communication, discretion, prioritization, async reliability.',
-    proof: 'Sample screen: prioritize mixed founder requests without hand-holding.',
+    proof: 'Screen: prioritize mixed founder requests without hand-holding.',
     className: 'wide-last',
   },
 ];
 
-const cleanupDeliverables = [
-  ['Candidate ranking', 'A clear top-to-bottom list so you know who deserves the first interview slot.'],
-  ['Skip reasons', 'Plain-English notes on weak applicants, risky patterns, and what not to waste time on.'],
-  ['Interview plan', 'Role-specific questions tied to customer tone, order accuracy, catalog detail, or founder ops judgment.'],
-  ['Next move', 'If the pile is weak, you get a practical recommendation: revise the post, change channel, or start a search.'],
+const hireIn30Stack = [
+  ['Founder Ops Bottleneck Audit', 'Find the recurring work that should come off your plate first.'],
+  ['Role Success Profile', 'Turn vague help into responsibilities, tools, hours, pay range, and 30-day success criteria.'],
+  ['Candidate Sourcing + Screening', 'Filter for communication, reliability, ecommerce fit, and role-specific judgment.'],
+  ['Top 3 Candidate Shortlist', 'Review ranked candidates with strengths, risks, compensation notes, and recommended next step.'],
+  ['Final Interview Kit', 'Use questions, a comparison matrix, and a practical test task tied to the role.'],
+  ['30-Day Onboarding System', 'Start with first tasks, daily async updates, weekly check-ins, and performance review structure.'],
 ];
 
 const steps = [
-  ['Define the role', 'Responsibilities, hours, tools, deal-breakers, pay range, and what good looks like.'],
-  ['Screen for the traits that matter', 'Candidates are filtered against role-specific criteria instead of resume noise and gut feel.'],
-  ['Shortlist candidates worth interviewing', 'You get ranked recommendations, red flags, interview questions, and next-step guidance.'],
-  ['Support the final decision', 'For search packages, we help compare finalists and reduce avoidable bad-hire risk.'],
+  ['Diagnose the bottleneck', 'We identify the role that creates the most immediate operational relief.'],
+  ['Define the role', 'Responsibilities, hours, tools, deal-breakers, pay range, and what good looks like in 30 days.'],
+  ['Source and screen', 'Candidates are filtered against role-specific criteria instead of resume noise and gut feel.'],
+  ['Deliver the shortlist', 'You get ranked recommendations, red flags, interview questions, and next-step guidance.'],
+  ['Install the rhythm', 'The selected hire starts with task clarity, async updates, and a simple accountability cadence.'],
 ];
 
 const faqs = [
-  ['Is this a VA agency?', 'No. VA Headhunter is a sourcing and screening service. We help you define, screen, and shortlist remote operations candidates.'],
-  ['Do you employ the candidates?', 'No. You hire and manage the candidate directly unless a future package says otherwise. That keeps the model lean and transparent.'],
-  ['What roles do you focus on?', 'Ecommerce operations roles: customer support, order processing, vendor follow-up, product upload/catalog support, and founder ops/admin.'],
-  ['Can you review applicants I already have?', 'Yes. Applicant Pile Cleanup is built for exactly that. Send the applicant pool and we rank the best interview options.'],
-  ['What if none of my applicants are good?', 'We will tell you directly, explain why, and recommend whether to revise the role, change the channel, or upgrade to a shortlist search.'],
-  ['Do you offer a guarantee?', 'Search packages can include clearly defined replacement support terms. Starter offers are scoped deliverables, not unlimited recruiting.'],
+  ['Is this a VA marketplace?', 'No. VA Headhunter is an operator-led hiring system for ecommerce remote ops roles. We help define, source, screen, shortlist, and support onboarding.'],
+  ['Do you employ the candidates?', 'No. You hire and manage the candidate directly. Clients handle payroll, agreements, classification, and legal compliance.'],
+  ['What roles do you focus on?', 'Customer support, order processing, vendor follow-up, product upload/catalog support, fulfillment coordination, and founder ops/admin.'],
+  ['What if I already have applicants?', 'Use Applicant Pile Cleanup. We rank the strongest candidates, flag red flags, and tell you who is worth interviewing.'],
+  ['What does Hire-in-30 cost?', 'Founding client projects start at $2,500. The standard price target is $3,500 as proof and delivery assets mature.'],
+  ['What if the candidates are not good enough?', 'If we cannot deliver three candidates who match the agreed role criteria, we keep sourcing at no additional search fee until we do.'],
+  ['Do you guarantee the hire stays forever?', 'No. Premium packages can include one defined replacement shortlist attempt under written terms. There are no vague unlimited replacement promises.'],
 ];
 
 function App() {
@@ -162,6 +157,7 @@ function App() {
 
   const scrollToForm = () => document.getElementById('hiring-audit')?.scrollIntoView({ behavior: 'smooth' });
   const scrollToPackages = () => document.getElementById('packages')?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToFlagship = () => document.getElementById('hire-in-30')?.scrollIntoView({ behavior: 'smooth' });
 
   const buildPayload = (form) => {
     const data = new FormData(form);
@@ -234,9 +230,9 @@ function App() {
           <span>VA Headhunter</span>
         </a>
         <nav aria-label="Primary navigation">
+          <a href="#hire-in-30">Hire-in-30</a>
           <a href="#roles">Roles</a>
-          <a href="#packages">Packages</a>
-          <a href="#process">Process</a>
+          <a href="#packages">Offers</a>
           <a href="#faq">FAQ</a>
         </nav>
         <button className="button button-small" onClick={scrollToForm}>Get a hiring audit</button>
@@ -244,23 +240,23 @@ function App() {
 
       <section className="hero" id="top">
         <div className="hero-copy" id="main-content">
-          <p className="kicker">Remote ops hiring for ecommerce operators</p>
-          <h1>Hire Better Remote Ops Help Without Sorting Through 100 Bad Applicants</h1>
+          <p className="kicker">Shopify ops hiring for ecommerce owners</p>
+          <h1>Hire a reliable remote ecommerce ops assistant without sorting through 100 bad applicants.</h1>
           <p className="hero-subhead">
-            VA Headhunter helps ecommerce owners define the role, screen the applicant pile, and shortlist reliable remote candidates for customer support, order processing, product uploads, and founder admin.
+            VA Headhunter helps Shopify and ecommerce founders define the right role, screen candidates, deliver a trusted shortlist, and onboard remote ops help without turning the hire into another management problem.
           </p>
           <div className="hero-actions">
-            <button className="button" onClick={scrollToForm}>Get a hiring audit <ArrowRight weight="bold" /></button>
-            <button className="button button-secondary" onClick={scrollToPackages}>View packages</button>
+            <button className="button" onClick={scrollToForm}>Get my free hiring audit <ArrowRight weight="bold" /></button>
+            <button className="button button-secondary" onClick={scrollToFlagship}>See Hire-in-30</button>
           </div>
-          <div className="hero-offer-note" aria-label="Recommended first offer">
-            <strong>Already have applicants?</strong>
-            <span>$299 Applicant Pile Cleanup ranks up to 50 candidates, flags red flags, and gives you the interview order.</span>
+          <div className="hero-offer-note" aria-label="Flagship offer">
+            <strong>Flagship offer:</strong>
+            <span>Ecommerce Ops Hire-in-30 starts at $2,500 for founding clients. The standard target price is $3,500.</span>
           </div>
         </div>
 
         <aside className="hero-panel" aria-label="Candidate screening preview">
-          <div className="panel-image" role="img" aria-label="A focused ecommerce operator reviewing candidate notes on a laptop" />
+          <div className="panel-image" role="img" aria-label="An ecommerce operator reviewing candidate notes on a laptop" />
           <div className="shortlist-card">
             <div className="card-topline">
               <span>Candidate shortlist</span>
@@ -296,28 +292,48 @@ function App() {
         </div>
       </section>
 
-      <section className="section cleanup-spotlight reveal" aria-label="Applicant Pile Cleanup details">
+      <section className="section comparison reveal">
+        <div className="comparison-copy">
+          <p className="kicker">Category clarity</p>
+          <h2>Not a job board. Not a cheap VA marketplace.</h2>
+          <p>VA Headhunter is built for founder-led ecommerce teams that need reliable remote operations help, not another resume pile or a lowest-cost labor marketplace.</p>
+        </div>
+        <div className="comparison-table" role="table" aria-label="Hiring options comparison">
+          <div className="row header" role="row"><span></span><strong>DIY post</strong><strong>VA marketplace</strong><strong>VA Headhunter</strong></div>
+          {[
+            ['Role clarity', 'Often vague', 'Template-driven', 'Role success profile before screening'],
+            ['Applicant screening', 'Manual', 'Resume filters', 'Role-specific criteria and red flags'],
+            ['Decision support', 'Scattered notes', 'Limited', 'Shortlist packet with recommendations'],
+            ['Ecommerce ops focus', 'Owner-dependent', 'Broad VA pool', 'Customer, orders, catalog, founder ops'],
+            ['Onboarding support', 'Owner figures it out', 'Generic', 'First tasks, updates, and accountability cadence'],
+          ].map(([label, diy, market, vh]) => (
+            <div className="row" role="row" key={label}><strong>{label}</strong><span>{diy}</span><span>{market}</span><span>{vh}</span></div>
+          ))}
+        </div>
+      </section>
+
+      <section className="section cleanup-spotlight flagship" id="hire-in-30" aria-label="Ecommerce Ops Hire-in-30 details">
         <div className="cleanup-intro">
-          <p className="kicker">Recommended first move</p>
-          <h2>Turn the applicant mess into a short, sane interview list.</h2>
-          <p>If you already posted the role, this is the fastest way to stop guessing. Send the applicant pile and get the next hiring decision organized.</p>
-          <button className="button" onClick={scrollToForm}>Clean up my applicants <ArrowRight weight="bold" /></button>
+          <p className="kicker">Flagship offer</p>
+          <h2>Ecommerce Ops Hire-in-30</h2>
+          <p>Get a reliable remote ecommerce ops hire installed in 30 days without sorting through 100 bad applicants or guessing how to manage them.</p>
+          <button className="button" onClick={scrollToForm}>Install my first remote ops hire <ArrowRight weight="bold" /></button>
         </div>
         <div className="cleanup-panel">
           <div className="cleanup-price">
-            <span>Applicant Pile Cleanup</span>
-            <strong>$299</strong>
-            <small>Review up to 50 applicants</small>
+            <span>Founding client projects start at</span>
+            <strong>$2,500</strong>
+            <small>Standard target price: $3,500 after initial proof and delivery assets mature.</small>
           </div>
           <div className="cleanup-list">
-            {cleanupDeliverables.map(([title, copy]) => (
+            {hireIn30Stack.map(([title, copy]) => (
               <article key={title}>
                 <CheckCircle weight="fill" />
                 <div><h3>{title}</h3><p>{copy}</p></div>
               </article>
             ))}
           </div>
-          <div className="cleanup-warning"><WarningCircle weight="duotone" /> If none of the applicants are worth interviewing, you will get that answer directly instead of a forced shortlist.</div>
+          <div className="cleanup-warning"><ShieldCheck weight="duotone" /> If we cannot deliver three candidates who match the agreed role criteria, we keep sourcing at no additional search fee.</div>
         </div>
       </section>
 
@@ -344,11 +360,49 @@ function App() {
         </div>
       </section>
 
+      <section className="section packet reveal">
+        <div className="packet-copy">
+          <p className="kicker">Decision packet</p>
+          <h2>You do not get a resume dump.</h2>
+          <p>Each shortlist turns candidate evidence into a calm hiring decision: fit score, strengths, risks, compensation expectations, communication notes, and the recommended interview path.</p>
+          <button className="button" onClick={scrollToForm}>See if my role is a fit <ArrowRight weight="bold" /></button>
+        </div>
+        <div className="packet-card">
+          <div className="packet-header"><ClipboardText weight="duotone" /> Sample screening packet</div>
+          <dl>
+            <div><dt>Fit score</dt><dd>89 / 100</dd></div>
+            <div><dt>Compensation expectation</dt><dd>$7 to $9/hr depending on hours and scope</dd></div>
+            <div><dt>Communication notes</dt><dd>Clear async writing, concise customer tone, asks good clarifying questions.</dd></div>
+            <div><dt>Strengths</dt><dd>Order follow-up, Shopify admin, customer response accuracy.</dd></div>
+            <div><dt>Risks</dt><dd>Needs validation on vendor escalation and edge-case judgment.</dd></div>
+            <div><dt>Recommended question</dt><dd>Walk me through a delayed order with an upset customer.</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section className="section process" id="process">
+        <div className="section-heading align-left reveal">
+          <p className="kicker">How it works</p>
+          <h2>A cleaner way to install remote ops help.</h2>
+        </div>
+        <div className="timeline">
+          {steps.map(([title, copy], index) => (
+            <article className="step stack-card" key={title}>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <div>
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="section packages" id="packages">
         <div className="section-heading align-left reveal">
           <p className="kicker">Offer ladder</p>
-          <h2>Start with the smallest fix that removes hiring noise.</h2>
-          <p>Applicant Pile Cleanup is the no-brainer first build because it targets owners who already have applicants and already feel the pain.</p>
+          <h2>Start with the smallest fix that matches your hiring stage.</h2>
+          <p>The audit routes you to the right next move: free diagnosis, applicant cleanup, or full Hire-in-30 support.</p>
         </div>
         <div className="offer-grid">
           {offers.map((offer) => (
@@ -368,78 +422,33 @@ function App() {
         </div>
       </section>
 
-      <section className="section process" id="process">
-        <div className="section-heading align-left reveal">
-          <p className="kicker">How it works</p>
-          <h2>A cleaner way to decide who deserves an interview.</h2>
+      <section className="section authority reveal">
+        <div>
+          <p className="kicker">Why VA Headhunter</p>
+          <h2>Built by an ecommerce operator, not a generic staffing shop.</h2>
+          <p>VA Headhunter is led by a Shopify store owner who understands customer support backlog, order issues, product updates, vendor follow-up, fulfillment coordination, and founder admin.</p>
         </div>
-        <div className="timeline">
-          {steps.map(([title, copy], index) => (
-            <article className="step stack-card" key={title}>
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              <div>
-                <h3>{title}</h3>
-                <p>{copy}</p>
-              </div>
-            </article>
+        <div className="authority-grid">
+          {['Shopify/ecommerce operator', 'MBA', 'PMP', 'Retired USMCR Sergeant Major', 'n8n, Hermes, and AI workflow leverage'].map((item) => (
+            <div className="authority-pill" key={item}><CheckCircle weight="fill" /> {item}</div>
           ))}
-        </div>
-      </section>
-
-      <section className="section comparison reveal">
-        <div className="comparison-copy">
-          <p className="kicker">Why it feels different</p>
-          <h2>Not a job board. Not a cheap VA marketplace.</h2>
-          <p>VA Headhunter combines role clarity, structured screening, active sourcing when needed, referral-driven discovery, and practical operator judgment.</p>
-        </div>
-        <div className="comparison-table" role="table" aria-label="Hiring options comparison">
-          <div className="row header" role="row"><span></span><strong>DIY post</strong><strong>VA marketplace</strong><strong>VA Headhunter</strong></div>
-          {[
-            ['Role clarity', 'Often vague', 'Template-driven', 'Success profile before screening'],
-            ['Applicant screening', 'Manual', 'Resume filters', 'Role-specific criteria and red flags'],
-            ['Candidate notes', 'Scattered', 'Limited', 'Shortlist packet with recommendations'],
-            ['Ecommerce ops focus', 'Owner-dependent', 'Broad VA pool', 'Customer, orders, catalog, founder ops'],
-            ['Interview support', 'Owner figures it out', 'Generic', 'Questions tied to risks and must-haves'],
-          ].map(([label, diy, market, vh]) => (
-            <div className="row" role="row" key={label}><strong>{label}</strong><span>{diy}</span><span>{market}</span><span>{vh}</span></div>
-          ))}
-        </div>
-      </section>
-
-      <section className="section packet reveal">
-        <div className="packet-copy">
-          <p className="kicker">Candidate packet</p>
-          <h2>Know who is actually worth interviewing.</h2>
-          <p>Instead of dumping resumes in your lap, we organize the evidence so you can make a faster, calmer hiring decision.</p>
-          <button className="button" onClick={scrollToForm}>Get a hiring audit <ArrowRight weight="bold" /></button>
-        </div>
-        <div className="packet-card">
-          <div className="packet-header"><ClipboardText weight="duotone" /> Sample screening packet</div>
-          <dl>
-            <div><dt>Fit score</dt><dd>89 / 100</dd></div>
-            <div><dt>Compensation expectation</dt><dd>$7 to $9/hr depending on hours</dd></div>
-            <div><dt>Communication notes</dt><dd>Clear async writing, concise customer tone, asks good clarifying questions.</dd></div>
-            <div><dt>Strengths</dt><dd>Order follow-up, Shopify admin, customer response accuracy.</dd></div>
-            <div><dt>Risks</dt><dd>Needs validation on vendor escalation and edge-case judgment.</dd></div>
-            <div><dt>Recommended question</dt><dd>Walk me through a delayed order with an upset customer.</dd></div>
-          </dl>
         </div>
       </section>
 
       <section className="section reversal reveal">
         <ShieldCheck weight="duotone" />
         <div>
-          <p className="kicker">Risk reversal</p>
-          <h2>Start with a small hiring fix or hand us the whole search.</h2>
-          <p>Not every owner needs a full recruiting search. Start with a hiring kit or applicant cleanup. If you want us to source and shortlist candidates, upgrade to a search package. Replacement support is available only with clear written terms, not vague unlimited promises.</p>
+          <p className="kicker">Risk reversal with boundaries</p>
+          <h2>Structured enough to reduce risk. Scoped enough to stay sane.</h2>
+          <p>If we cannot deliver three candidates who match the agreed role criteria, we keep sourcing at no additional search fee. Premium packages can include one replacement shortlist attempt under defined terms. VA Headhunter does not handle payroll, legal compliance, employer-of-record services, or unlimited replacements.</p>
         </div>
       </section>
 
       <section className="section lead-form" id="hiring-audit">
         <div className="form-copy reveal">
           <p className="kicker">Start with clarity</p>
-          <h2>Get a hiring audit.</h2>
-          <p>Tell us where hiring is stuck. We will point you toward the smallest practical next step: kit, cleanup, shortlist search, or full support.</p>
+          <h2>Get a free ecommerce hiring audit.</h2>
+          <p>Tell us where hiring is stuck. We will point you toward the smallest practical next step: audit, applicant cleanup, shortlist search, or full Hire-in-30 support.</p>
           <div className="credibility-card">
             <EnvelopeSimple weight="duotone" />
             <div><strong>Plain recommendations, not recruiter fog.</strong><span>If the applicant pile is weak, you will hear that directly. If a smaller fix is enough, we will not push a larger search.</span></div>
@@ -464,7 +473,7 @@ function App() {
             <>
               <label>Name<input name="name" type="text" autoComplete="name" required /></label>
               <label>Email<input name="email" type="email" autoComplete="email" required aria-describedby={error ? 'form-error' : undefined} /></label>
-              <label>Business type<input name="businessType" type="text" placeholder="Shopify store, agency, marketplace seller" /></label>
+              <label>Business type<input name="businessType" type="text" placeholder="Shopify store, marketplace seller, ecommerce brand" /></label>
               <label>Role you are hiring for<input name="role" type="text" placeholder="Customer support, order ops, catalog admin" /></label>
               <label>Current hiring stage<select name="stage" defaultValue=""><option value="" disabled>Select one</option><option>Thinking about posting a role</option><option>Already have applicants</option><option>Need candidates sourced</option><option>Trying to replace a weak hire</option></select></label>
               <label>Notes<textarea name="notes" rows="4" placeholder="What is stuck, tools they need to know, hours, timezone, budget, or deal-breakers." /></label>
@@ -492,18 +501,18 @@ function App() {
 
       <section className="final-cta reveal">
         <div>
-          <p className="kicker">Ready to stop guessing on remote hires?</p>
-          <h2>Clean up the applicant pile, or let VA Headhunter build the shortlist.</h2>
+          <p className="kicker">Ready to get out of the ecommerce ops pile?</p>
+          <h2>Define the role, screen smarter, and install remote ops help without guessing.</h2>
         </div>
         <div className="hero-actions centered">
-          <button className="button button-light" onClick={scrollToForm}>Get a hiring audit <ArrowRight weight="bold" /></button>
-          <button className="button button-secondary dark" onClick={scrollToPackages}>View packages</button>
+          <button className="button button-light" onClick={scrollToForm}>Get my free hiring audit <ArrowRight weight="bold" /></button>
+          <button className="button button-secondary dark" onClick={scrollToFlagship}>See Hire-in-30</button>
         </div>
       </section>
 
       <footer>
         <span>VA Headhunter</span>
-        <span>Remote operations hiring for ecommerce operators.</span>
+        <span>Operator-led remote ops hiring for ecommerce teams.</span>
         <a href="#top">Back to top</a>
       </footer>
     </main>
