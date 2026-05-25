@@ -138,7 +138,13 @@ const packetItems = [
   ['Interview questions', 'Role-specific prompts that reveal judgment before the hire.'],
 ];
 
-const credibility = ['Shopify/ecommerce store owner', 'MBA', 'PMP', 'Retired USMCR Sergeant Major', 'Hands-on automation experience with n8n, Hermes, and AI workflows'];
+const whyUsPoints = [
+  ['Role clarity before sourcing', 'We define what the hire should own, what tools they need to use, what success looks like, and what should stay with the founder.'],
+  ['Screening for the signals that matter', 'We look for clear communication, reliability, task ownership, ecommerce context, and signs that the candidate can follow through without constant chasing.'],
+  ['Candidate packets, not resume piles', 'You get a focused shortlist with strengths, risks, compensation expectations, interview questions, and recommended next steps.'],
+  ['Onboarding structure from day one', 'A good hire still needs direction. We help you start with first tasks, daily updates, weekly check-ins, and clear expectations.'],
+  ['Founder-led, system-backed', 'VA Headhunter is founder-led, which means early clients get senior judgment on role design, screening, and candidate fit. Behind that judgment is a repeatable process for audits, scorecards, candidate packets, and onboarding structure.'],
+];
 
 const goodFit = [
   'You run a Shopify or ecommerce business.',
@@ -485,13 +491,19 @@ function App() {
       <section className="section authority reveal">
         <div>
           <p className="kicker">Why VA Headhunter</p>
-          <h2>Built by an ecommerce operator, not a generic staffing shop.</h2>
-          <p>VA Headhunter was built from the operator side of the problem. Rob understands the daily drag behind customer support, order follow-up, product updates, vendor coordination, fulfillment issues, and founder admin because he has built and operated ecommerce systems himself.</p>
-          <p>That background matters because remote hiring is not just recruiting. It is role clarity, judgment, accountability, and simple operating systems.</p>
+          <h2>A better way to hire remote ecommerce ops help.</h2>
+          <p>Most hiring services give you more candidates. VA Headhunter gives you a clearer role, stronger screening, and a shortlist built around the actual work inside your ecommerce business.</p>
+          <p>We help founder-led ecommerce teams hire remote support for customer service, order follow-up, product uploads, vendor coordination, fulfillment issues, and recurring admin work. The goal is not to flood your inbox with resumes. The goal is to help you find someone reliable enough to take real work off your plate.</p>
         </div>
-        <div className="authority-grid">
-          {credibility.map((item) => (
-            <div className="authority-pill" key={item}><CheckCircle weight="fill" /> {item}</div>
+        <div className="authority-grid why-us-grid">
+          {whyUsPoints.map(([title, copy]) => (
+            <article className="authority-pill why-us-card" key={title}>
+              <CheckCircle weight="fill" />
+              <div>
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </div>
+            </article>
           ))}
         </div>
       </section>
