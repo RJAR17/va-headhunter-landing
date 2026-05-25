@@ -156,11 +156,11 @@ nav a:hover { color: var(--moss); transform: translateY(-1px); }
 
 h1, h2, h3, p { margin-top: 0; }
 h1 {
-  margin-bottom: 26px;
-  max-width: 980px;
-  font-size: clamp(3.2rem, 6.4vw, 6.55rem);
-  line-height: 0.88;
-  letter-spacing: -0.082em;
+  margin-bottom: 30px;
+  max-width: 1020px;
+  font-size: clamp(3rem, 5.65vw, 5.85rem);
+  line-height: 1.03;
+  letter-spacing: -0.064em;
   color: var(--charcoal);
   text-wrap: balance;
 }
@@ -715,7 +715,7 @@ footer a { color: var(--moss-dark); font-weight: 900; }
   .site-header .button { display: none; }
   .hero { margin-top: 38px; }
   .hero-copy { padding-top: 22px; }
-  h1 { font-size: clamp(3rem, 15vw, 4.5rem); line-height: 0.9; }
+  h1 { font-size: clamp(2.75rem, 12vw, 4.2rem); line-height: 1.02; letter-spacing: -0.058em; }
   h2 { font-size: clamp(2.35rem, 11vw, 3.5rem); }
   .hero-panel { min-height: 580px; }
   .panel-image { inset: 0 0 18% 0; border-radius: 34px; }
