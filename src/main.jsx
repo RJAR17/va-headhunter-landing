@@ -17,6 +17,11 @@ import {
   WarningCircle,
 } from '@phosphor-icons/react';
 import './styles.css';
+import heroOpsImage from './assets/media/va-headhunter-hero-ops-overload.jpg';
+import hireSprintImage from './assets/media/va-headhunter-hire-in-30-sprint.jpg';
+import candidatePacketImage from './assets/media/va-headhunter-candidate-packet.jpg';
+import roleCollageImage from './assets/media/va-headhunter-role-collage.jpg';
+import founderCredibilityImage from './assets/media/va-headhunter-founder-credibility.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -189,9 +194,8 @@ function App() {
       gsap.utils.toArray('.reveal').forEach((element) => {
         gsap.fromTo(
           element,
-          { autoAlpha: 0, y: 42 },
+          { y: 42 },
           {
-            autoAlpha: 1,
             y: 0,
             duration: 0.9,
             ease: 'power3.out',
@@ -203,9 +207,8 @@ function App() {
       gsap.utils.toArray('.stack-card').forEach((element, index) => {
         gsap.fromTo(
           element,
-          { autoAlpha: 0, y: 56, scale: 0.97 },
+          { y: 34, scale: 0.98 },
           {
-            autoAlpha: 1,
             y: 0,
             scale: 1,
             duration: 0.72,
@@ -327,7 +330,9 @@ function App() {
         </div>
 
         <aside className="hero-panel" aria-label="Hiring audit snapshot">
-          <div className="panel-image" role="img" aria-label="Ecommerce hiring audit desk scene" />
+          <div className="panel-image" aria-label="Ecommerce operator reviewing support tickets and order follow-up">
+            <img src={heroOpsImage} alt="Ecommerce operator reviewing remote operations work, support tickets, and order follow-up" />
+          </div>
           <div className="audit-card">
             <div className="audit-header">
               <ClipboardText weight="duotone" />
@@ -388,6 +393,9 @@ function App() {
           <h2>The first hire should remove real ecommerce work from your plate.</h2>
           <p>VA Headhunter focuses on remote roles that support the daily operations of Shopify and ecommerce businesses. If the role is vague, the audit helps define what should be delegated first.</p>
         </div>
+        <div className="section-visual roles-visual reveal">
+          <img src={roleCollageImage} alt="Four ecommerce operations role examples: customer support, order follow-up, catalog uploads, and fulfillment coordination" />
+        </div>
         <div className="role-grid">
           {roles.map(({ icon: Icon, title, copy, className }) => (
             <article className={`role-card stack-card ${className}`} key={title}>
@@ -416,6 +424,9 @@ function App() {
             <small>We recommend the right path based on your role, applicant pool, urgency, and onboarding needs.</small>
           </div>
           <p className="promise-box">Get a reliable remote ecommerce ops candidate shortlist and onboarding plan in a 30-day operating window, without sorting through 100 weak applicants yourself.</p>
+          <div className="process-visual">
+            <img src={hireSprintImage} alt="Thirty day hiring sprint board for role clarity, screening, shortlist, interview kit, and onboarding" />
+          </div>
           <div className="cleanup-list">
             {hireIn30Stack.map(([title, copy]) => (
               <article key={title}>
@@ -475,8 +486,12 @@ function App() {
           <p>The shortlist is designed to help you make a better hiring decision faster.</p>
           <button className="button" onClick={scrollToForm}>Request My Hiring Audit <ArrowRight weight="bold" /></button>
         </div>
-        <div className="packet-card">
-          <div className="packet-header"><ClipboardText weight="duotone" /> Candidate packet preview</div>
+        <div className="packet-stack">
+          <div className="section-visual packet-visual">
+            <img src={candidatePacketImage} alt="Anonymized ecommerce operations candidate shortlist packet with three candidate cards" />
+          </div>
+          <div className="packet-card">
+            <div className="packet-header"><ClipboardText weight="duotone" /> Candidate packet preview</div>
           <dl>
             {packetItems.map(([label, copy]) => <div key={label}><dt>{label}</dt><dd>{copy}</dd></div>)}
           </dl>
@@ -484,6 +499,7 @@ function App() {
             <article><strong>Candidate A</strong><p>Strong customer support background. Clear written communication. Familiar with Shopify order lookup and refund workflows.</p></article>
             <article><strong>Candidate B</strong><p>Good admin and catalog experience. Strong attention to detail. Better fit for product uploads than customer-facing work.</p></article>
             <article><strong>Candidate C</strong><p>High ownership signals. Comfortable with inbox/admin and order follow-up. Needs clear SOPs and weekly priorities.</p></article>
+          </div>
           </div>
         </div>
       </section>
@@ -495,8 +511,12 @@ function App() {
           <p>Most hiring services give you more candidates. VA Headhunter gives you a clearer role, stronger screening, and a shortlist built around the actual work inside your ecommerce business.</p>
           <p>We help founder-led ecommerce teams hire remote support for customer service, order follow-up, product uploads, vendor coordination, fulfillment issues, and recurring admin work. The goal is not to flood your inbox with resumes. The goal is to help you find someone reliable enough to take real work off your plate.</p>
         </div>
-        <div className="authority-grid why-us-grid">
-          {whyUsPoints.map(([title, copy]) => (
+        <div className="authority-side">
+          <div className="section-visual authority-media">
+            <img src={founderCredibilityImage} alt="Operator-led ecommerce hiring review with candidate notes and remote interview screen" />
+          </div>
+          <div className="authority-grid why-us-grid">
+            {whyUsPoints.map(([title, copy]) => (
             <article className="authority-pill why-us-card" key={title}>
               <CheckCircle weight="fill" />
               <div>
@@ -504,7 +524,8 @@ function App() {
                 <p>{copy}</p>
               </div>
             </article>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 

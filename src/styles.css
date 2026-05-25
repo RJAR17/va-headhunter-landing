@@ -216,14 +216,18 @@ p { color: var(--muted); line-height: 1.64; text-wrap: pretty; }
 .panel-image {
   position: absolute;
   inset: 0 4% 16% 0;
+  overflow: hidden;
   border-radius: 46px;
-  background:
-    linear-gradient(180deg, rgba(23, 33, 30, 0.06), rgba(23, 33, 30, 0.62)),
-    url('https://picsum.photos/seed/ecommerce-operator-hiring/1000/1300');
-  background-size: cover;
-  background-position: center;
-  filter: saturate(0.72) contrast(1.08);
+  background: var(--charcoal);
   box-shadow: var(--shadow);
+}
+.panel-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: 62% center;
+  filter: saturate(0.82) contrast(1.05);
 }
 .panel-image::after {
   content: '';
@@ -297,9 +301,41 @@ p { color: var(--muted); line-height: 1.64; text-wrap: pretty; }
   width: min(var(--max), calc(100% - 32px));
   margin: clamp(110px, 15vw, 190px) auto 0;
 }
+.hero + .section-tight {
+  margin-top: clamp(72px, 9vw, 120px);
+}
 .section-heading { max-width: 880px; margin: 0 0 46px; }
 .section-heading p { max-width: 64ch; }
 .align-left { text-align: left; }
+
+.section-visual {
+  position: relative;
+  overflow: hidden;
+  border-radius: clamp(28px, 4vw, 42px);
+  background: var(--surface);
+  border: 1px solid rgba(43,57,50,0.10);
+  box-shadow: var(--shadow-soft);
+}
+.section-visual img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+.section-visual::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  border: 1px solid rgba(255,255,255,0.54);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.55);
+}
+.roles-visual {
+  min-height: clamp(280px, 42vw, 520px);
+  margin: -12px 0 28px;
+}
+.roles-visual img { object-position: center; }
 
 .pain {
   padding: clamp(32px, 6vw, 70px);
@@ -407,6 +443,21 @@ p { color: var(--muted); line-height: 1.64; text-wrap: pretty; }
   background: rgba(255,255,255,0.08);
   font-weight: 780;
   line-height: 1.5;
+}
+.process-visual {
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 18px;
+  border-radius: 28px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 22px 60px rgba(0,0,0,0.18);
+}
+.process-visual img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: saturate(0.9) contrast(1.02);
 }
 
 .role-grid {
@@ -550,6 +601,9 @@ p { color: var(--muted); line-height: 1.64; text-wrap: pretty; }
   align-items: center;
 }
 .packet-copy { max-width: 560px; }
+.packet-stack { display: grid; gap: 18px; }
+.packet-visual { aspect-ratio: 4 / 3; }
+.packet-visual img { object-position: center; }
 .packet-card {
   padding: 30px;
   border-radius: 34px;
@@ -583,6 +637,9 @@ dd { margin: 0; color: var(--ink-2); font-weight: 750; line-height: 1.45; }
 }
 .authority h2 { max-width: 820px; }
 .authority p { max-width: 68ch; }
+.authority-side { display: grid; gap: 18px; }
+.authority-media { aspect-ratio: 4 / 3; }
+.authority-media img { object-position: 48% center; }
 .authority-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -748,6 +805,7 @@ footer a { color: var(--moss-dark); font-weight: 900; }
 
 @media (max-width: 1120px) {
   .hero, .packages, .process, .comparison, .packet, .lead-form, .pain, .cleanup-spotlight, .final-cta, .authority, .qualification, .qualification-grid { grid-template-columns: 1fr; }
+  .roles-visual { min-height: clamp(250px, 52vw, 460px); }
   .qualification-card.bad { margin-top: 0; }
   .hero { min-height: auto; }
   .hero-panel { min-height: 620px; }
@@ -767,6 +825,8 @@ footer a { color: var(--moss-dark); font-weight: 900; }
   h2 { font-size: clamp(2.05rem, 8.5vw, 3rem); line-height: 1.14; letter-spacing: -0.034em; }
   .hero-panel { min-height: 580px; }
   .panel-image { inset: 0 0 18% 0; border-radius: 34px; }
+  .panel-image img { object-position: 58% center; }
+  .roles-visual, .packet-visual, .authority-media { border-radius: 26px; }
   .shortlist-card { width: 96%; padding: 18px; }
   .audit-card { width: 96%; padding: 18px; }
   .audit-row { grid-template-columns: 1fr; gap: 4px; }
