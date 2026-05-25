@@ -26,7 +26,7 @@ const FALLBACK_EMAIL = import.meta.env.VITE_CONTACT_EMAIL || 'rob@rjar.us';
 const offers = [
   {
     name: 'Free Ecommerce Hiring Audit',
-    price: 'Free',
+    price: 'Audit-first',
     stage: 'Start here',
     description: 'Show us the role or applicant pile. We identify the hiring leaks, weak-fit risks, and best next move before you spend on a full search.',
     bullets: ['Role clarity review', 'Applicant/process risk notes', 'Best-fit offer recommendation', 'No bloated consulting call'],
@@ -34,7 +34,7 @@ const offers = [
   },
   {
     name: 'Applicant Pile Cleanup',
-    price: 'From $399',
+    price: 'Scoped after audit',
     stage: 'Already posted',
     description: 'Send the pile. We rank the candidates worth interviewing, flag the obvious risks, and tell you if the whole pool is too weak to trust.',
     bullets: ['Review up to 50 applicants', 'Rank top candidates', 'Flag red flags', 'Interview order', 'Role-specific questions'],
@@ -42,7 +42,7 @@ const offers = [
   },
   {
     name: 'Top 3 Remote Ops Shortlist',
-    price: 'From $1,500',
+    price: 'Scoped after audit',
     stage: 'Need candidates',
     description: 'We define the role, source and screen candidates, and deliver three ecommerce remote ops candidates worth interviewing.',
     bullets: ['One role success profile', 'Sourcing and first-pass screening', 'Top 3 candidate packet', 'Interview questions', 'Selection support'],
@@ -50,7 +50,7 @@ const offers = [
   },
   {
     name: 'Ecommerce Ops Hire-in-30',
-    price: 'From $2,500',
+    price: 'Fixed-scope recommendation',
     stage: 'Flagship',
     description: 'Define the role, source and screen candidates, deliver a top-three shortlist, and install the onboarding rhythm so the hire does not become another person to babysit.',
     bullets: ['Founder bottleneck audit', 'Role success profile', 'Sourcing and screening', 'Top 3 shortlist packet', 'Interview and test-task support', '30-day onboarding system'],
@@ -139,7 +139,7 @@ const faqs = [
   ['Do you employ the candidates?', 'No. You hire and manage the candidate directly. Clients handle payroll, agreements, classification, and legal compliance.'],
   ['What roles do you focus on?', 'Customer support, order processing, vendor follow-up, product upload/catalog support, fulfillment coordination, and founder ops/admin.'],
   ['What if I already have applicants?', 'Use Applicant Pile Cleanup. We rank the strongest candidates, flag red flags, and tell you who is worth interviewing.'],
-  ['What does Hire-in-30 cost?', 'Founding client projects start at $2,500. The standard price target is $3,500 as proof and delivery assets mature.'],
+  ['What does it cost?', 'Pricing depends on the hiring path. Some clients only need applicant cleanup. Others need a sourced shortlist or full Hire-in-30 support. Start with the free ecommerce hiring audit and we will recommend the smallest practical next step.'],
   ['What if the candidates are not good enough?', 'If we cannot deliver three candidates who match the agreed role criteria, we keep sourcing at no additional search fee until we do.'],
   ['Do you guarantee the hire stays forever?', 'No. Premium packages can include one defined replacement shortlist attempt under written terms. There are no vague unlimited replacement promises.'],
 ];
@@ -283,7 +283,7 @@ function App() {
           </div>
           <div className="hero-offer-note" aria-label="Flagship offer">
             <strong>Flagship offer:</strong>
-            <span>Ecommerce Ops Hire-in-30 starts at $2,500 for founding clients. The standard target price is $3,500.</span>
+            <span>Start with a free ecommerce hiring audit. If there is a fit, we will recommend the right path: applicant cleanup, candidate shortlist, or full Hire-in-30 support.</span>
           </div>
         </div>
 
@@ -353,9 +353,9 @@ function App() {
         </div>
         <div className="cleanup-panel">
           <div className="cleanup-price">
-            <span>Founding client projects start at</span>
-            <strong>$2,500</strong>
-            <small>Standard target price: $3,500 after initial proof and delivery assets mature.</small>
+            <span>Start with the audit</span>
+            <strong>Fixed scope</strong>
+            <small>We recommend the smallest practical path based on your role, applicant pool, urgency, and onboarding needs.</small>
           </div>
           <div className="cleanup-list">
             {hireIn30Stack.map(([title, copy]) => (
@@ -434,7 +434,7 @@ function App() {
         <div className="section-heading align-left reveal">
           <p className="kicker">Offer ladder</p>
           <h2>Start with the smallest fix that matches your hiring stage.</h2>
-          <p>The audit routes you to the right next move: free diagnosis, applicant cleanup, or full Hire-in-30 support.</p>
+          <p>The audit routes you to the right next move: free diagnosis, applicant cleanup, a sourced shortlist, or full Hire-in-30 support. Pricing follows the scope after we understand the role.</p>
         </div>
         <div className="offer-grid">
           {offers.map((offer) => (
