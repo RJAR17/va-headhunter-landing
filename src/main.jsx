@@ -12,6 +12,7 @@ import {
   Package,
   ShieldCheck,
   ShoppingCart,
+  Truck,
   UserCircleCheck,
   WarningCircle,
 } from '@phosphor-icons/react';
@@ -38,6 +39,14 @@ const offers = [
     description: 'Send the pile. We rank the candidates worth interviewing, flag the obvious risks, and tell you if the whole pool is too weak to trust.',
     bullets: ['Review up to 50 applicants', 'Rank top candidates', 'Flag red flags', 'Interview order', 'Role-specific questions'],
     cta: 'Clean up my applicants',
+  },
+  {
+    name: 'Top 3 Remote Ops Shortlist',
+    price: 'From $1,500',
+    stage: 'Need candidates',
+    description: 'We define the role, source and screen candidates, and deliver three ecommerce remote ops candidates worth interviewing.',
+    bullets: ['One role success profile', 'Sourcing and first-pass screening', 'Top 3 candidate packet', 'Interview questions', 'Selection support'],
+    cta: 'Start a shortlist search',
   },
   {
     name: 'Ecommerce Ops Hire-in-30',
@@ -81,8 +90,31 @@ const roles = [
     copy: 'Founder inbox, admin tasks, research, scheduling, SOP follow-through, and loose operational edges.',
     criteria: 'Communication, discretion, prioritization, async reliability.',
     proof: 'Screen: prioritize mixed founder requests without hand-holding.',
-    className: 'wide-last',
+    className: 'compact',
   },
+  {
+    icon: Truck,
+    title: 'Fulfillment coordination assistant',
+    copy: 'Tracking, shipping issue follow-up, warehouse communication, customer updates, and exception logs.',
+    criteria: 'Follow-through, status accuracy, calm escalation, customer clarity.',
+    proof: 'Screen: resolve a shipment exception and write the customer update.',
+    className: 'compact',
+  },
+];
+
+const goodFit = [
+  'You run a Shopify or ecommerce business.',
+  'You are still doing recurring ops work yourself.',
+  'You need support, order follow-up, catalog, admin, fulfillment, or vendor coordination help.',
+  'You can pay fair remote talent and respond quickly during the search.',
+  'You want a structured hiring process, not a cheap resume pile.',
+];
+
+const badFit = [
+  'You only want the lowest possible hourly rate.',
+  'You want unlimited replacements or a guaranteed perfect hire.',
+  'You expect VA Headhunter to handle payroll, compliance, or permanent management.',
+  'You cannot define the role, give feedback, or onboard the person you hire.',
 ];
 
 const hireIn30Stack = [
@@ -296,7 +328,7 @@ function App() {
         <div className="comparison-copy">
           <p className="kicker">Category clarity</p>
           <h2>Not a job board. Not a cheap VA marketplace.</h2>
-          <p>VA Headhunter is built for founder-led ecommerce teams that need reliable remote operations help, not another resume pile or a lowest-cost labor marketplace.</p>
+          <p>VA Headhunter is built for founder-led ecommerce teams that need reliable remote operations help, not another resume pile, lowest-cost labor marketplace, generic recruiter, or do-nothing delay.</p>
         </div>
         <div className="comparison-table" role="table" aria-label="Hiring options comparison">
           <div className="row header" role="row"><span></span><strong>DIY post</strong><strong>VA marketplace</strong><strong>VA Headhunter</strong></div>
@@ -441,6 +473,24 @@ function App() {
           <p className="kicker">Risk reversal with boundaries</p>
           <h2>Structured enough to reduce risk. Scoped enough to stay sane.</h2>
           <p>If we cannot deliver three candidates who match the agreed role criteria, we keep sourcing at no additional search fee. Premium packages can include one replacement shortlist attempt under defined terms. VA Headhunter does not handle payroll, legal compliance, employer-of-record services, or unlimited replacements.</p>
+        </div>
+      </section>
+
+      <section className="section qualification reveal" aria-label="Founder qualification">
+        <div className="section-heading align-left">
+          <p className="kicker">Fit filter</p>
+          <h2>Is VA Headhunter right for you?</h2>
+          <p>The best clients want operator-grade help and are willing to run a clean process. The wrong clients are shopping for the cheapest possible resume pile.</p>
+        </div>
+        <div className="qualification-grid">
+          <article className="qualification-card good">
+            <h3>Good fit if</h3>
+            <ul>{goodFit.map((item) => <li key={item}><CheckCircle weight="fill" /> {item}</li>)}</ul>
+          </article>
+          <article className="qualification-card bad">
+            <h3>Not a fit if</h3>
+            <ul>{badFit.map((item) => <li key={item}><WarningCircle weight="fill" /> {item}</li>)}</ul>
+          </article>
         </div>
       </section>
 
